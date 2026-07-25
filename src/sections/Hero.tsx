@@ -10,7 +10,7 @@ function Hero() {
       <div className="mx-auto grid min-h-[calc(100vh-7rem)] max-w-7xl items-center gap-12 lg:grid-cols-2">
         <div>
           <p className="mb-2 text-lg text-slate-400">
-            Hi, I am
+            Hello, I am
           </p>
 
           <h1 className="mb-4 text-3xl font-semibold sm:text-4xl">
