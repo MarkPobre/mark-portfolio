@@ -111,7 +111,7 @@ function Hero() {
             <img
               src="/images/profile.jpeg"
               alt="Mark Pobre"
-              className="h-72 w-72 rounded-full border-4 border-orange-500 object-cover object-top grayscale sm:h-96 sm:w-96 lg:h-[460px] lg:w-[460px]"
+              className="h-72 w-72 rounded-full border-4 border-orange-500 object-cover object-top sm:h-96 sm:w-96 lg:h-[460px] lg:w-[460px]"
             />
           </div>
         </div>
