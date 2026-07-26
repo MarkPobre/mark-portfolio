@@ -1,5 +1,6 @@
 import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { TypeAnimation } from "react-type-animation";
 
 function Hero() {
   return (
@@ -17,10 +18,21 @@ function Hero() {
             Mark Pobre
           </h1>
 
-          <h2 className="mb-6 inline-block bg-gradient-to-r from-orange-300 via-orange-500 to-amber-300 bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
-            <span className="animate-pulse">
-              Frontend Developer
-            </span>
+          <h2 className="mb-6 min-h-[72px] text-5xl font-bold text-orange-500 sm:text-6xl">
+            <TypeAnimation
+              sequence={[
+                "Frontend Developer",
+                2000,
+                "Web Developer",
+                2000,
+                "Digital Marketing Specialist",
+                2000,
+              ]}
+              wrapper="span"
+              speed={50}
+              deletionSpeed={60}
+              repeat={Infinity}
+            />
           </h2>
 
           <p className="mb-8 max-w-xl text-lg leading-8 text-slate-400">
