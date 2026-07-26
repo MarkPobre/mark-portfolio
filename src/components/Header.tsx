@@ -1,16 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navigationLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About Me", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Portfolio", href: "#projects" },
-  { name: "Contact Me", href: "#contact" },
+  { name: "Home", href: "#home", id: "home" },
+  { name: "About Me", href: "#about", id: "about" },
+  { name: "Skills", href: "#skills", id: "skills" },
+  { name: "Portfolio", href: "#projects", id: "projects" },
+  { name: "Contact Me", href: "#contact", id: "contact" },
 ];
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    function updateActiveSection() {
+      const scrollPosition = window.scrollY + 180;
+      let currentSection = "home";
+
+      navigationLinks.forEach((link) => {
+        const section = document.getElementById(link.id);
+
+        if (section && scrollPosition >= section.offsetTop) {
+          currentSection = link.id;
+        }
+      });
+
+      setActiveSection(currentSection);
+    }
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+    };
+  }, []);
 
   function closeMenu() {
     setIsMenuOpen(false);
@@ -28,17 +54,23 @@ function Header() {
         </a>
 
         <div className="hidden items-center gap-8 md:flex">
-          {navigationLinks.map((link, index) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={`font-medium transition hover:text-orange-500 ${
-                index === 0 ? "text-orange-500" : "text-slate-400"
-              }`}
-            >
-              {link.name}
-            </a>
-          ))}
+          {navigationLinks.map((link) => {
+            const isActive = activeSection === link.id;
+
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                className={`font-medium transition ${
+                  isActive
+                    ? "text-orange-500"
+                    : "text-slate-400 hover:text-orange-500"
+                }`}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </div>
 
         <a
@@ -51,7 +83,9 @@ function Header() {
         <button
           type="button"
           onClick={() => setIsMenuOpen((current) => !current)}
-          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={
+            isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={isMenuOpen}
           className="rounded-md border border-slate-700 p-2 text-white transition hover:border-orange-500 hover:text-orange-500 md:hidden"
         >
@@ -62,16 +96,24 @@ function Header() {
       {isMenuOpen && (
         <div className="border-t border-white/10 bg-[#0f0f0f] px-6 pb-6 md:hidden">
           <div className="flex flex-col gap-2 pt-4">
-            {navigationLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={closeMenu}
-                className="rounded-md px-4 py-3 font-medium text-slate-300 transition hover:bg-[#1d1d1d] hover:text-orange-500"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navigationLinks.map((link) => {
+              const isActive = activeSection === link.id;
+
+              return (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  onClick={closeMenu}
+                  className={`rounded-md px-4 py-3 font-medium transition ${
+                    isActive
+                      ? "bg-[#1d1d1d] text-orange-500"
+                      : "text-slate-300 hover:bg-[#1d1d1d] hover:text-orange-500"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
 
             <a
               href="#contact"
