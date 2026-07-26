@@ -30,7 +30,6 @@ function Header() {
     }
 
     updateActiveSection();
-
     window.addEventListener("scroll", updateActiveSection);
 
     return () => {
@@ -61,13 +60,21 @@ function Header() {
               <a
                 key={link.id}
                 href={link.href}
-                className={`font-medium transition ${
+                className={`group relative pb-2 font-medium transition-colors duration-300 ${
                   isActive
                     ? "text-orange-500"
                     : "text-slate-400 hover:text-orange-500"
                 }`}
               >
                 {link.name}
+
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 w-full origin-left bg-orange-500 transition-transform duration-300 ease-out ${
+                    isActive
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
               </a>
             );
           })}
