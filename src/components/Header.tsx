@@ -42,7 +42,7 @@ function Header() {
   }
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#0f0f0f]/95 backdrop-blur">
+    <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#0f0f0f]/60 shadow-lg shadow-black/10 backdrop-blur-xl backdrop-saturate-150">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         <a
           href="#home"
