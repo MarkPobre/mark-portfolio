@@ -17,8 +17,10 @@ function Hero() {
             Mark Pobre
           </h1>
 
-          <h2 className="mb-6 text-5xl font-bold text-orange-500 sm:text-6xl">
-            Frontend Developer
+          <h2 className="mb-6 inline-block bg-gradient-to-r from-orange-300 via-orange-500 to-amber-300 bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
+            <span className="animate-pulse">
+              Frontend Developer
+            </span>
           </h2>
 
           <p className="mb-8 max-w-xl text-lg leading-8 text-slate-400">
