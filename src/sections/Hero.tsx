@@ -27,8 +27,6 @@ function Hero() {
           <h2 className="mb-6 min-h-[72px] text-5xl font-bold leading-tight text-black sm:text-6xl">
             <TypeAnimation
               sequence={[
-                "Frontend Developer",
-                2000,
                 "Web Developer",
                 2000,
                 "Digital Marketing Specialist",
