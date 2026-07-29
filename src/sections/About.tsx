@@ -48,56 +48,57 @@ function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-[#151515] px-6 py-24 text-white lg:px-10"
+      className="relative scroll-mt-20 overflow-hidden bg-[#f7f7f7] px-6 py-24 font-sans text-black lg:px-10"
     >
-      <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
+      {/* Monochrome background effects */}
+      <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
 
-      <div className="pointer-events-none absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.025),transparent_55%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
+        {/* Section heading */}
         <div className="mb-14 text-center">
-          <p className="mb-3 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text font-medium uppercase tracking-widest text-transparent">
+          <p className="mb-3 font-medium uppercase tracking-widest text-black/50">
             Get to know me
           </p>
 
-          <h2 className="text-4xl font-bold sm:text-5xl">
-            About{" "}
-            <span className="bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-              Me
-            </span>
+          <h2 className="text-4xl font-bold text-black sm:text-5xl">
+            About Me
           </h2>
 
-          <div className="mx-auto mt-5 h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-500" />
+          <div className="mx-auto mt-5 h-1 w-20 rounded-full bg-black" />
         </div>
 
         <div className="grid items-center gap-14 lg:grid-cols-2">
+          {/* Profile image */}
           <div className="relative mx-auto w-full max-w-md">
-            <div className="absolute -left-4 -top-4 h-full w-full rounded-xl bg-gradient-to-br from-blue-600 via-cyan-400 to-indigo-500 p-[2px]">
-              <div className="h-full w-full rounded-xl bg-[#151515]" />
-            </div>
+            <div className="absolute -left-4 -top-4 h-full w-full rounded-xl border border-black/20" />
 
-            <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-600 via-cyan-400 to-indigo-500 p-1 shadow-2xl shadow-blue-500/20">
-              <div className="overflow-hidden rounded-lg bg-[#1d1d1d]">
+            <div className="relative overflow-hidden rounded-xl border border-black/30 bg-white p-1 shadow-2xl shadow-black/10">
+              <div className="overflow-hidden rounded-lg bg-white">
                 <img
                   src="/images/profile.jpeg"
                   alt="Mark Pobre"
-                  className="h-[500px] w-full object-cover object-top"
+                  className="h-[500px] w-full object-cover object-top grayscale transition duration-500 hover:grayscale-0"
                 />
               </div>
             </div>
           </div>
 
+          {/* About content */}
           <div>
-            <p className="mb-3 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text text-lg font-medium text-transparent">
+            <p className="mb-3 text-lg font-medium text-black/60">
               Frontend Developer and Digital Marketing Specialist
             </p>
 
-            <h3 className="mb-6 text-3xl font-bold leading-tight sm:text-4xl">
+            <h3 className="mb-6 text-3xl font-bold leading-tight text-black sm:text-4xl">
               I create websites and digital systems that support business
               growth.
             </h3>
 
-            <div className="space-y-5 text-lg leading-8 text-slate-400">
+            <div className="space-y-5 text-lg leading-8 text-black/60">
               <p>
                 I have experience supporting website management, digital
                 marketing, online advertising, CRM systems, social media and
@@ -118,13 +119,14 @@ function About() {
               </p>
             </div>
 
+            {/* Skill tags */}
             <div className="mt-8 flex flex-wrap gap-3">
               {skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="group flex items-center gap-2 rounded-md border border-blue-500/30 bg-[#1d1d1d]/80 px-4 py-2.5 text-slate-300 backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-cyan-400 hover:bg-blue-500/10 hover:text-cyan-400"
+                  className="group flex items-center gap-2 rounded-md border border-black/20 bg-white px-4 py-2.5 text-black/70 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-black hover:bg-black hover:text-white"
                 >
-                  <span className="text-blue-400 transition duration-300 group-hover:text-cyan-400">
+                  <span className="text-black/70 transition duration-300 group-hover:text-white">
                     {skill.icon}
                   </span>
 
@@ -133,10 +135,11 @@ function About() {
               ))}
             </div>
 
+            {/* Action buttons */}
             <div className="mt-10 flex flex-wrap gap-4">
               <a
                 href="#projects"
-                className="group flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-500 px-7 py-3 font-semibold text-white shadow-lg shadow-blue-500/20 transition duration-300 hover:-translate-y-0.5 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-400 hover:shadow-blue-500/30"
+                className="group flex items-center gap-2 rounded-md border border-black bg-black px-7 py-3 font-semibold text-white shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-black"
               >
                 View My Work
 
@@ -148,7 +151,7 @@ function About() {
 
               <a
                 href="#contact"
-                className="flex items-center gap-2 rounded-md border border-blue-500/50 px-7 py-3 font-semibold text-slate-300 transition duration-300 hover:border-cyan-400 hover:bg-blue-500/10 hover:text-cyan-400"
+                className="flex items-center gap-2 rounded-md border border-black/50 bg-white px-7 py-3 font-semibold text-black transition duration-300 hover:-translate-y-0.5 hover:border-black hover:bg-black hover:text-white"
               >
                 <Mail size={19} />
                 Contact Me

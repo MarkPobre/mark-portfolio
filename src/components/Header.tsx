@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 const navigationLinks = [
   { name: "Home", href: "#home", id: "home" },
   { name: "About Me", href: "#about", id: "about" },
+  { name: "Education", href: "#education", id: "education" },
   { name: "Skills", href: "#skills", id: "skills" },
   { name: "Portfolio", href: "#projects", id: "projects" },
   { name: "Contact Me", href: "#contact", id: "contact" },
@@ -14,47 +15,77 @@ function Header() {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
+    let animationFrameId: number;
+
     function updateActiveSection() {
-      const scrollPosition = window.scrollY + 180;
+      const triggerPoint = window.innerHeight * 0.35;
       let currentSection = "home";
 
-      navigationLinks.forEach((link) => {
+      for (const link of navigationLinks) {
         const section = document.getElementById(link.id);
 
-        if (section && scrollPosition >= section.offsetTop) {
-          currentSection = link.id;
+        if (!section) {
+          continue;
         }
-      });
+
+        const sectionPosition = section.getBoundingClientRect();
+
+        if (
+          sectionPosition.top <= triggerPoint &&
+          sectionPosition.bottom > triggerPoint
+        ) {
+          currentSection = link.id;
+          break;
+        }
+      }
+
+      const isAtBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 5;
+
+      if (isAtBottom) {
+        currentSection = "contact";
+      }
 
       setActiveSection(currentSection);
     }
 
+    function handleScroll() {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(updateActiveSection);
+    }
+
     updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection);
+
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", updateActiveSection);
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
-  function closeMenu() {
+  function handleNavigationClick(sectionId: string) {
+    setActiveSection(sectionId);
     setIsMenuOpen(false);
   }
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-blue-500/20 bg-[#0f0f0f]/60 shadow-lg shadow-blue-950/20 backdrop-blur-xl backdrop-saturate-150">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+    <header className="fixed top-0 z-50 w-full border-b border-black/10 bg-white/85 font-sans shadow-sm shadow-black/5 backdrop-blur-xl backdrop-saturate-150">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
         {/* Logo */}
         <a
           href="#home"
-          onClick={closeMenu}
-          className="bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text text-xl font-bold tracking-wide text-transparent"
+          onClick={() => handleNavigationClick("home")}
+          className="text-lg font-bold tracking-widest text-black transition duration-300 hover:text-black/60"
         >
           MARK P.
         </a>
 
         {/* Desktop navigation */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {navigationLinks.map((link) => {
             const isActive = activeSection === link.id;
 
@@ -62,21 +93,22 @@ function Header() {
               <a
                 key={link.id}
                 href={link.href}
+                onClick={() => handleNavigationClick(link.id)}
                 aria-current={isActive ? "page" : undefined}
-                className="group relative pb-2 font-medium"
+                className="group relative py-1.5 text-sm font-medium"
               >
                 <span
                   className={`transition-colors duration-300 ${
                     isActive
-                      ? "bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text text-transparent"
-                      : "text-slate-400 group-hover:text-cyan-400"
+                      ? "text-black"
+                      : "text-black/50 group-hover:text-black"
                   }`}
                 >
                   {link.name}
                 </span>
 
                 <span
-                  className={`absolute bottom-0 left-0 h-0.5 w-full origin-left bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-500 transition-transform duration-300 ease-out ${
+                  className={`absolute bottom-0 left-0 h-0.5 w-full origin-left bg-black transition-transform duration-300 ease-out ${
                     isActive
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -90,7 +122,8 @@ function Header() {
         {/* Desktop Hire Me button */}
         <a
           href="#contact"
-          className="hidden rounded-md bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-500 px-6 py-2.5 font-semibold text-white shadow-lg shadow-blue-500/20 transition duration-300 hover:-translate-y-0.5 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-400 hover:shadow-blue-500/30 md:inline-block"
+          onClick={() => handleNavigationClick("contact")}
+          className="hidden items-center rounded-md border border-black bg-black px-5 py-2 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-black lg:inline-flex"
         >
           Hire Me
         </a>
@@ -103,16 +136,16 @@ function Header() {
             isMenuOpen ? "Close navigation menu" : "Open navigation menu"
           }
           aria-expanded={isMenuOpen}
-          className="rounded-md border border-blue-500/40 p-2 text-slate-300 transition duration-300 hover:border-cyan-400 hover:bg-blue-500/10 hover:text-cyan-400 md:hidden"
+          className="rounded-md border border-black/25 p-1.5 text-black/70 transition duration-300 hover:border-black hover:bg-black hover:text-white lg:hidden"
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
       {/* Mobile navigation */}
       {isMenuOpen && (
-        <div className="border-t border-blue-500/20 bg-[#0f0f0f]/90 px-6 pb-6 backdrop-blur-xl md:hidden">
-          <div className="flex flex-col gap-2 pt-4">
+        <div className="border-t border-black/10 bg-white/95 px-6 pb-5 shadow-lg shadow-black/5 backdrop-blur-xl lg:hidden">
+          <div className="flex flex-col gap-1.5 pt-3">
             {navigationLinks.map((link) => {
               const isActive = activeSection === link.id;
 
@@ -120,12 +153,12 @@ function Header() {
                 <a
                   key={link.id}
                   href={link.href}
-                  onClick={closeMenu}
+                  onClick={() => handleNavigationClick(link.id)}
                   aria-current={isActive ? "page" : undefined}
-                  className={`rounded-md px-4 py-3 font-medium transition duration-300 ${
+                  className={`rounded-md border px-4 py-2.5 text-sm font-medium transition duration-300 ${
                     isActive
-                      ? "bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-500 text-white"
-                      : "text-slate-300 hover:bg-blue-500/10 hover:text-cyan-400"
+                      ? "border-black bg-black text-white"
+                      : "border-transparent text-black/60 hover:border-black/20 hover:bg-black/5 hover:text-black"
                   }`}
                 >
                   {link.name}
@@ -135,8 +168,8 @@ function Header() {
 
             <a
               href="#contact"
-              onClick={closeMenu}
-              className="mt-2 rounded-md bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-500 px-4 py-3 text-center font-semibold text-white transition duration-300 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-400"
+              onClick={() => handleNavigationClick("contact")}
+              className="mt-2 rounded-md border border-black bg-black px-4 py-2.5 text-center text-sm font-semibold text-white transition duration-300 hover:bg-white hover:text-black"
             >
               Hire Me
             </a>

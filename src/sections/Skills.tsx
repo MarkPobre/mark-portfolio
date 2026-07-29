@@ -1,6 +1,21 @@
-const skillGroups = [
+import {
+  CodeXml,
+  Megaphone,
+  PanelsTopLeft,
+  Wrench,
+  type LucideIcon,
+} from "lucide-react";
+
+type SkillGroup = {
+  title: string;
+  icon: LucideIcon;
+  skills: string[];
+};
+
+const skillGroups: SkillGroup[] = [
   {
     title: "Frontend Development",
+    icon: CodeXml,
     skills: [
       "HTML",
       "CSS",
@@ -13,6 +28,7 @@ const skillGroups = [
   },
   {
     title: "Website and Business Systems",
+    icon: PanelsTopLeft,
     skills: [
       "WordPress",
       "Zoho CRM",
@@ -24,6 +40,7 @@ const skillGroups = [
   },
   {
     title: "Digital Marketing",
+    icon: Megaphone,
     skills: [
       "Google Ads",
       "Meta Ads",
@@ -35,6 +52,7 @@ const skillGroups = [
   },
   {
     title: "Tools",
+    icon: Wrench,
     skills: [
       "Git",
       "GitHub",
@@ -50,58 +68,69 @@ function Skills() {
   return (
     <section
       id="skills"
-      className="relative overflow-hidden bg-[#0f0f0f] px-6 py-24 text-white lg:px-10"
+      className="relative scroll-mt-20 overflow-hidden bg-[#f7f7f7] px-6 py-24 font-sans text-black lg:px-10"
     >
-      {/* Decorative background glows */}
-      <div className="pointer-events-none absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
+      {/* Monochrome background effects */}
+      <div className="pointer-events-none absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
 
-      <div className="pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 top-10 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.025),transparent_55%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
         {/* Section heading */}
         <div className="mb-14 text-center">
-          <p className="mb-3 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text font-medium uppercase tracking-widest text-transparent">
+          <p className="mb-3 font-medium uppercase tracking-widest text-black/50">
             What I work with
           </p>
 
-          <h2 className="text-4xl font-bold sm:text-5xl">
-            My{" "}
-            <span className="bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text text-transparent">
-              Skills
-            </span>
+          <h2 className="text-4xl font-bold text-black sm:text-5xl">
+            My Skills
           </h2>
 
-          <div className="mx-auto mt-5 h-1 w-20 rounded-full bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-500" />
+          <div className="mx-auto mt-5 h-1 w-20 rounded-full bg-black" />
         </div>
 
         {/* Skill groups */}
         <div className="grid gap-6 md:grid-cols-2">
-          {skillGroups.map((group) => (
-            <article
-              key={group.title}
-              className="group relative overflow-hidden rounded-xl border border-blue-500/20 bg-[#171717]/80 p-7 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-cyan-400/60 hover:shadow-xl hover:shadow-blue-500/10"
-            >
-              {/* Card gradient glow */}
-              <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl transition duration-300 group-hover:bg-cyan-400/15" />
+          {skillGroups.map((group) => {
+            const Icon = group.icon;
 
-              <div className="relative z-10">
-                <h3 className="mb-5 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 bg-clip-text text-2xl font-semibold text-transparent">
-                  {group.title}
-                </h3>
+            return (
+              <article
+                key={group.title}
+                className="group relative overflow-hidden rounded-xl border border-black/15 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-black/40 hover:shadow-xl hover:shadow-black/10"
+              >
+                {/* Decorative card effect */}
+                <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full bg-black/[0.03] blur-3xl transition duration-300 group-hover:bg-black/[0.06]" />
 
-                <div className="flex flex-wrap gap-3">
-                  {group.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="rounded-md border border-blue-500/25 bg-[#0f0f0f]/70 px-4 py-2 text-sm text-slate-300 transition duration-300 hover:border-cyan-400 hover:bg-blue-500/10 hover:text-cyan-400"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                <div className="relative z-10">
+                  <div className="mb-6 flex items-center gap-4">
+                    <div className="rounded-lg border border-black/20 bg-white p-3 text-black transition duration-300 group-hover:border-black group-hover:bg-black group-hover:text-white">
+                      <Icon size={24} />
+                    </div>
+
+                    <h3 className="text-2xl font-semibold text-black">
+                      {group.title}
+                    </h3>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3">
+                    {group.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="rounded-md border border-black/15 bg-[#f7f7f7] px-4 py-2 text-sm font-medium text-black/65 transition duration-300 hover:-translate-y-0.5 hover:border-black hover:bg-black hover:text-white"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+
+                <div className="absolute bottom-0 left-0 h-1 w-full origin-left scale-x-0 bg-black transition-transform duration-300 group-hover:scale-x-100" />
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

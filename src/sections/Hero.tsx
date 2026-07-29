@@ -6,23 +6,25 @@ function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-[#0f0f0f] px-6 pb-16 pt-28 text-white lg:px-10"
+      className="relative min-h-screen scroll-mt-20 overflow-hidden bg-white px-6 pb-16 pt-20 font-sans text-black lg:px-10"
     >
-      {/* Decorative background glows */}
-      <div className="pointer-events-none absolute -left-40 top-32 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
+      {/* Monochrome background effects */}
+      <div className="pointer-events-none absolute -left-40 top-32 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
 
-      <div className="relative z-10 mx-auto grid min-h-[calc(100vh-7rem)] max-w-7xl items-center gap-12 lg:grid-cols-2">
+      <div className="pointer-events-none absolute -right-40 bottom-10 h-96 w-96 rounded-full bg-black/5 blur-3xl" />
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.035),transparent_55%)]" />
+
+      <div className="relative z-10 mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 lg:grid-cols-2">
+        {/* Hero content */}
         <div>
-          <p className="mb-2 text-lg text-slate-400">
-            Hello, I am
-          </p>
+          <p className="mb-2 text-lg text-black/60">Hello, I am</p>
 
-          <h1 className="mb-4 text-3xl font-semibold sm:text-4xl">
+          <h1 className="mb-4 text-3xl font-semibold text-black sm:text-4xl">
             Mark Pobre
           </h1>
 
-          <h2 className="mb-6 min-h-[72px] bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-500 bg-clip-text text-5xl font-bold text-transparent sm:text-6xl">
+          <h2 className="mb-6 min-h-[72px] text-5xl font-bold leading-tight text-black sm:text-6xl">
             <TypeAnimation
               sequence={[
                 "Frontend Developer",
@@ -39,7 +41,7 @@ function Hero() {
             />
           </h2>
 
-          <p className="mb-8 max-w-xl text-lg leading-8 text-slate-400">
+          <p className="mb-8 max-w-xl text-lg leading-8 text-black/60">
             I create responsive websites, web applications and digital systems
             that help businesses improve their online presence and workflows.
           </p>
@@ -51,7 +53,7 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="Mark Pobre GitHub profile"
-              className="rounded-full border border-blue-500/40 p-3 text-slate-400 transition duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:via-cyan-400 hover:to-indigo-500 hover:text-white"
+              className="rounded-full border border-black/30 p-3 text-black/70 transition duration-300 hover:-translate-y-1 hover:border-black hover:bg-black hover:text-white"
             >
               <FaGithub size={20} />
             </a>
@@ -61,7 +63,7 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="Mark Pobre LinkedIn profile"
-              className="rounded-full border border-blue-500/40 p-3 text-slate-400 transition duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:via-cyan-400 hover:to-indigo-500 hover:text-white"
+              className="rounded-full border border-black/30 p-3 text-black/70 transition duration-300 hover:-translate-y-1 hover:border-black hover:bg-black hover:text-white"
             >
               <FaLinkedinIn size={20} />
             </a>
@@ -69,7 +71,7 @@ function Hero() {
             <a
               href="mailto:your-email@example.com"
               aria-label="Send an email to Mark Pobre"
-              className="rounded-full border border-blue-500/40 p-3 text-slate-400 transition duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue-600 hover:via-cyan-400 hover:to-indigo-500 hover:text-white"
+              className="rounded-full border border-black/30 p-3 text-black/70 transition duration-300 hover:-translate-y-1 hover:border-black hover:bg-black hover:text-white"
             >
               <Mail size={20} />
             </a>
@@ -79,7 +81,7 @@ function Hero() {
           <div className="mb-12 flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="rounded-md bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-500 px-7 py-3 font-semibold text-white shadow-lg shadow-blue-500/20 transition duration-300 hover:-translate-y-0.5 hover:from-blue-500 hover:via-cyan-400 hover:to-indigo-400 hover:shadow-blue-500/30"
+              className="rounded-md border border-black bg-black px-7 py-3 font-semibold text-white shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-black"
             >
               Hire Me
             </a>
@@ -87,40 +89,29 @@ function Hero() {
             <a
               href="/resume/mark-pobre-resume.pdf"
               download
-              className="rounded-md border border-blue-500/50 px-7 py-3 font-semibold text-slate-300 transition duration-300 hover:border-cyan-400 hover:bg-blue-500/10 hover:text-cyan-400"
+              className="rounded-md border border-black/50 bg-white px-7 py-3 font-semibold text-black transition duration-300 hover:-translate-y-0.5 hover:border-black hover:bg-black hover:text-white"
             >
               Download CV
             </a>
           </div>
 
           {/* Statistics */}
-          <div className="grid max-w-xl grid-cols-3 divide-x divide-slate-700 rounded-lg border border-white/5 bg-[#171717]/80 px-4 py-5 backdrop-blur">
+          <div className="grid max-w-xl grid-cols-3 divide-x divide-black/15 rounded-lg border border-black/10 bg-black/[0.03] px-4 py-5 shadow-sm backdrop-blur">
             <div className="px-4">
-              <p className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
-                1+
-              </p>
-
-              <p className="mt-1 text-sm text-slate-400">
-                Years Experience
-              </p>
+              <p className="text-2xl font-bold text-black">1+</p>
+              <p className="mt-1 text-sm text-black/50">Years Experience</p>
             </div>
 
             <div className="px-4">
-              <p className="bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-2xl font-bold text-transparent">
-                5+
-              </p>
-
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="text-2xl font-bold text-black">5+</p>
+              <p className="mt-1 text-sm text-black/50">
                 Projects Completed
               </p>
             </div>
 
             <div className="px-4">
-              <p className="bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-2xl font-bold text-transparent">
-                10+
-              </p>
-
-              <p className="mt-1 text-sm text-slate-400">
+              <p className="text-2xl font-bold text-black">10+</p>
+              <p className="mt-1 text-sm text-black/50">
                 Digital Campaigns
               </p>
             </div>
@@ -129,10 +120,10 @@ function Hero() {
 
         {/* Profile image */}
         <div className="relative mx-auto flex w-full max-w-lg items-center justify-center">
-          <div className="absolute h-[90%] w-[90%] rounded-full bg-gradient-to-r from-blue-600/20 via-cyan-400/20 to-indigo-500/20 blur-3xl" />
+          <div className="absolute h-[90%] w-[90%] rounded-full bg-black/10 blur-3xl" />
 
-          <div className="relative rounded-full bg-gradient-to-br from-blue-600 via-cyan-400 to-indigo-500 p-1.5 shadow-2xl shadow-blue-500/20">
-            <div className="rounded-full bg-[#1b1b1b] p-2">
+          <div className="relative rounded-full border border-black/40 bg-white p-2 shadow-2xl shadow-black/15">
+            <div className="rounded-full border border-black/10 bg-white p-2">
               <img
                 src="/images/profile.jpeg"
                 alt="Mark Pobre"
